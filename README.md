@@ -1,0 +1,1 @@
+This is an editor for the new 3DS release of Mario and Luigi Superstar Saga.

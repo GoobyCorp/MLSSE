@@ -1,5 +1,7 @@
 This is an editor for the new 3DS release of Mario and Luigi Superstar Saga.
 
+**BACK UP YOUR SAVES**
+
 Usage is as follows:
 ```
 usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--mario-xp MARIO_XP]

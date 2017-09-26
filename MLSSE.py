@@ -79,6 +79,7 @@ if __name__ == "__main__":
     parser.add_argument("--max-xp", action="store_true", help="Set Mario and Luigi's XP to 999999")
     parser.add_argument("--max-beans", action="store_true", help="Set all beans to 99")
     parser.add_argument("--max-items", action="store_true", help="Set all items to 99")
+    parser.add_argument("--max-all", action="store_true", help="Max gold, XP, beans, and items")
 
     #listing
     parser.add_argument("--list-mario-xp", action="store_true", help="List Mario's current XP")
@@ -146,7 +147,7 @@ if __name__ == "__main__":
 
     #modifications
     #max xp
-    if args.max_xp:
+    if args.max_xp or args.max_all:
         bio.seek(MARIO_XP_LOC)
         bio.write(pack("<i", 9999999))
         bio.seek(LUIGI_XP_LOC)
@@ -162,7 +163,7 @@ if __name__ == "__main__":
             bio.write(pack("<i", args.luigi_xp))
 
     #max money
-    if args.max_gold:
+    if args.max_gold or args.max_all:
         bio.seek(GOLD_LOC)
         bio.write(pack("<i", 999999))
     elif args.gold is not None and 0 <= args.gold <= 999999:  #set gold
@@ -170,7 +171,7 @@ if __name__ == "__main__":
         bio.write(pack("<i", args.gold))
 
     #max items
-    if args.max_items:
+    if args.max_items or args.max_all:
         bio.seek(ITEM_START)
         for x in range(ITEM_LEN):
             bio.write(bytes([99]))
@@ -210,7 +211,7 @@ if __name__ == "__main__":
         bio.write(bytearray(curr_vals))
 
     #max beans
-    if args.max_beans:
+    if args.max_beans or args.max_all:
         bio.seek(BEAN_START)
         for x in range(BEAN_LEN):
             bio.write(bytes([99]))

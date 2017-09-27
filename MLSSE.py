@@ -87,6 +87,7 @@ if __name__ == "__main__":
     parser.add_argument("--list-gold", action="store_true", help="List your current gold")
     parser.add_argument("--list-items", action="store_true", help="List all items")
     parser.add_argument("--list-beans", action="store_true", help="List all beans")
+    parser.add_argument("--list-all", action="store_true", help="List everything")
 
     args = parser.parse_args()
 
@@ -95,23 +96,26 @@ if __name__ == "__main__":
     save_data = open(args.in_file, "rb").read()
     bio = BytesIO(save_data)
 
+    assert len(save_data) == 0x12510, "Invalid save file size!"
+
     #listing
     #mario xp
-    if args.list_mario_xp:
+    if args.list_mario_xp or args.list_all:
         bio.seek(MARIO_XP_LOC)
         print("Mario XP: %s" % (unpack("<i", bio.read(4))[0]))
 
     #luigi xp
-    if args.list_luigi_xp:
+    if args.list_luigi_xp or args.list_all:
         bio.seek(LUIGI_XP_LOC)
         print("Luigi XP: %s" % (unpack("<i", bio.read(4))[0]))
 
     #gold
-    if args.list_gold:
+    if args.list_gold or args.list_all:
+        bio.seek(GOLD_LOC)
         print("Gold: %s" % (unpack("<i", bio.read(4))[0]))
 
     #items
-    if args.list_items:
+    if args.list_items or args.list_all:
         bio.seek(ITEM_START)
         print("Mushrooms:        %s" % (bio.read(1)[0]))
         print("Super Mushrooms:  %s" % (bio.read(1)[0]))
@@ -138,7 +142,7 @@ if __name__ == "__main__":
         print("Green Peppers:    %s" % (bio.read(1)[0]))
 
     #beans
-    if args.list_beans:
+    if args.list_beans or args.list_all:
         bio.seek(BEAN_START)
         print("Woo Beans:     %s" % (bio.read(1)[0]))
         print("Hoo Beans:     %s" % (bio.read(1)[0]))
@@ -231,4 +235,4 @@ if __name__ == "__main__":
 
     out_data = bio.getvalue()
 
-    open(args.out_file, "wb").write(out_data)
+    #open(args.out_file, "wb").write(out_data)

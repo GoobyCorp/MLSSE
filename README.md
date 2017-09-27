@@ -8,9 +8,9 @@ You can grab your save using [JKSM](https://gbatemp.net/threads/release-jks-save
 
 Usage is as follows:
 ```
-usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--mario-xp MARIO_XP]
-                [--luigi-xp LUIGI_XP] [--gold GOLD] [--mushrooms MUSHROOMS]
-                [--super-mushrooms SUPER_MUSHROOMS]
+usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--mario-level MARIO_LEVEL]
+                [--luigi-level LUIGI_LEVEL] [--gold GOLD]
+                [--mushrooms MUSHROOMS] [--super-mushrooms SUPER_MUSHROOMS]
                 [--ultra-mushrooms ULTRA_MUSHROOMS]
                 [--max-mushrooms MAX_MUSHROOMS] [--nuts NUTS]
                 [--super-nuts SUPER_NUTS] [--ultra-nuts ULTRA_NUTS]
@@ -23,9 +23,10 @@ usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--mario-xp MARIO_XP]
                 [--boo-biscuits BOO_BISCUITS] [--red-peppers RED_PEPPERS]
                 [--green-peppers GREEN_PEPPERS] [--woo-beans WOO_BEANS]
                 [--hoo-beans HOO_BEANS] [--chuckle-beans CHUCKLE_BEANS]
-                [--hee-beans HEE_BEANS] [--max-gold] [--max-xp] [--max-beans]
-                [--max-items] [--max-all] [--list-mario-xp] [--list-luigi-xp]
-                [--list-gold] [--list-items] [--list-beans]
+                [--hee-beans HEE_BEANS] [--max-gold] [--max-levels]
+                [--max-beans] [--max-items] [--max-all] [--list-mario-xp]
+                [--list-luigi-xp] [--list-xp] [--list-gold] [--list-items]
+                [--list-beans] [--list-all]
 
 A save editor for Mario and Luigi Superstar Saga for 3DS
 
@@ -35,8 +36,10 @@ optional arguments:
                         The input save file
   -o OUT_FILE, --out-file OUT_FILE
                         The output save file
-  --mario-xp MARIO_XP   The amount of XP you want Mario to have
-  --luigi-xp LUIGI_XP   The amount of XP you want Luigi to have
+  --mario-level MARIO_LEVEL
+                        The level you want Mario to have
+  --luigi-level LUIGI_LEVEL
+                        The level you want Luigi to have
   --gold GOLD           The amount of gold you want
   --mushrooms MUSHROOMS
                         The amount of mushrooms you want
@@ -81,13 +84,15 @@ optional arguments:
   --hee-beans HEE_BEANS
                         The amount of hee beans you want
   --max-gold            Set gold to 999999
-  --max-xp              Set Mario and Luigi's XP to 999999
+  --max-levels          Set Mario and Luigi's XP to 999999
   --max-beans           Set all beans to 99
   --max-items           Set all items to 99
   --max-all             Max gold, XP, beans, and items
   --list-mario-xp       List Mario's current XP
   --list-luigi-xp       List Luigi's current XP
+  --list-xp             List both Mario and Luigi's XP
   --list-gold           List your current gold
   --list-items          List all items
   --list-beans          List all beans
+  --list-all            List everything
 ```

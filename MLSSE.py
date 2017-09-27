@@ -24,6 +24,210 @@ ITEM_LEN = 0x12
 BEAN_START = 0x130
 BEAN_LEN = 4
 
+MARIO_LEVELS = {
+    1: 0,
+    2: 7,
+    3: 32,
+    4: 68,
+    5: 108,
+    6: 218,
+    7: 336,
+    8: 470,
+    9: 694,
+    10: 962,
+    11: 1254,
+    12: 1578,
+    13: 1924,
+    14: 2306,
+    15: 2756,
+    16: 3256,
+    17: 3830,
+    18: 4480,
+    19: 5195,
+    20: 5975,
+    21: 6845,
+    22: 7805,
+    23: 8805,
+    24: 9845,
+    25: 10925,
+    26: 12025,
+    27: 13225,
+    28: 14575,
+    29: 16085,
+    30: 17765,
+    31: 19625,
+    32: 21685,
+    33: 23965,
+    34: 26485,
+    35: 29265,
+    36: 32325,
+    37: 35685,
+    38: 39365,
+    39: 43385,
+    40: 47805,
+    41: 52805,
+    42: 58305,
+    43: 64405,
+    44: 71905,
+    45: 79705,
+    46: 87805,
+    47: 96205,
+    48: 104905,
+    49: 113905,
+    50: 123205,
+    51: 132805,
+    52: 142705,
+    53: 152905,
+    54: 163405,
+    55: 174205,
+    56: 185305,
+    57: 196705,
+    58: 208405,
+    59: 220405,
+    60: 232705,
+    61: 245305,
+    62: 258205,
+    63: 271405,
+    64: 284905,
+    65: 298705,
+    66: 312805,
+    67: 327205,
+    68: 341905,
+    69: 356905,
+    70: 372205,
+    71: 387805,
+    72: 403705,
+    73: 419905,
+    74: 436405,
+    75: 453205,
+    76: 470305,
+    77: 487705,
+    78: 505405,
+    79: 523405,
+    80: 541705,
+    81: 560305,
+    82: 579205,
+    83: 598405,
+    84: 617905,
+    85: 637705,
+    86: 657805,
+    87: 678205,
+    88: 698905,
+    89: 719905,
+    90: 741205,
+    91: 762805,
+    92: 784705,
+    93: 806905,
+    94: 829405,
+    95: 852205,
+    96: 875305,
+    97: 898705,
+    98: 922405,
+    99: 946405
+}
+
+LUIGI_LEVELS = {
+    1: 0,
+    2: 10,
+    3: 37,
+    4: 77,
+    5: 123,
+    6: 233,
+    7: 353,
+    8: 493,
+    9: 699,
+    10: 969,
+    11: 1272,
+    12: 1552,
+    13: 1898,
+    14: 2280,
+    15: 2730,
+    16: 3239,
+    17: 3813,
+    18: 4463,
+    19: 5178,
+    20: 5958,
+    21: 6858,
+    22: 7818,
+    23: 8838,
+    24: 9878,
+    25: 10958,
+    26: 12118,
+    27: 13318,
+    28: 14668,
+    29: 16178,
+    30: 17858,
+    31: 19718,
+    32: 21778,
+    33: 24058,
+    34: 26578,
+    35: 29368,
+    36: 32418,
+    37: 35778,
+    38: 39458,
+    39: 43478,
+    40: 47898,
+    41: 52898,
+    42: 58398,
+    43: 64498,
+    44: 71998,
+    45: 79798,
+    46: 87898,
+    47: 96298,
+    48: 104998,
+    49: 113998,
+    50: 123298,
+    51: 132898,
+    52: 142798,
+    53: 152998,
+    54: 163498,
+    55: 174298,
+    56: 185398,
+    57: 196798,
+    58: 208498,
+    59: 220498,
+    60: 232798,
+    61: 245398,
+    62: 258298,
+    63: 271498,
+    64: 284998,
+    65: 298798,
+    66: 312898,
+    67: 327298,
+    68: 341998,
+    69: 356998,
+    70: 372298,
+    71: 387898,
+    72: 403798,
+    73: 419998,
+    74: 436498,
+    75: 453298,
+    76: 470398,
+    77: 487798,
+    78: 505498,
+    79: 523498,
+    80: 541798,
+    81: 560398,
+    82: 579298,
+    83: 598498,
+    84: 617998,
+    85: 637798,
+    86: 657898,
+    87: 678298,
+    88: 698998,
+    89: 719998,
+    90: 741298,
+    91: 762898,
+    92: 784798,
+    93: 806998,
+    94: 829498,
+    95: 852298,
+    96: 875398,
+    97: 898798,
+    98: 922498,
+    99: 946498
+}
+
 def hexlify(b: (bytes, bytearray)) -> str:
     return str(_hexlify(b), "utf8")
 
@@ -35,9 +239,9 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--out-file", type=str, default="ML1_001_modded.sav", help="The output save file")
 
     #modifications
-    #experience
-    parser.add_argument("--mario-xp", type=int, help="The amount of XP you want Mario to have")
-    parser.add_argument("--luigi-xp", type=int, help="The amount of XP you want Luigi to have")
+    #experience and leveling
+    parser.add_argument("--mario-level", type=int, help="The level you want Mario to have")
+    parser.add_argument("--luigi-level", type=int, help="The level you want Luigi to have")
 
     #gold
     parser.add_argument("--gold", type=int, help="The amount of gold you want")
@@ -76,7 +280,7 @@ if __name__ == "__main__":
 
     #max all
     parser.add_argument("--max-gold", action="store_true", help="Set gold to 999999")
-    parser.add_argument("--max-xp", action="store_true", help="Set Mario and Luigi's XP to 999999")
+    parser.add_argument("--max-levels", action="store_true", help="Set Mario and Luigi's XP to 999999")
     parser.add_argument("--max-beans", action="store_true", help="Set all beans to 99")
     parser.add_argument("--max-items", action="store_true", help="Set all items to 99")
     parser.add_argument("--max-all", action="store_true", help="Max gold, XP, beans, and items")
@@ -84,6 +288,7 @@ if __name__ == "__main__":
     #listing
     parser.add_argument("--list-mario-xp", action="store_true", help="List Mario's current XP")
     parser.add_argument("--list-luigi-xp", action="store_true", help="List Luigi's current XP")
+    parser.add_argument("--list-xp", action="store_true", help="List both Mario and Luigi's XP")
     parser.add_argument("--list-gold", action="store_true", help="List your current gold")
     parser.add_argument("--list-items", action="store_true", help="List all items")
     parser.add_argument("--list-beans", action="store_true", help="List all beans")
@@ -100,14 +305,16 @@ if __name__ == "__main__":
 
     #listing
     #mario xp
-    if args.list_mario_xp or args.list_all:
+    if args.list_mario_xp or args.list_xp or args.list_all:
         bio.seek(MARIO_XP_LOC)
-        print("Mario XP: %s" % (unpack("<i", bio.read(4))[0]))
+        mario_xp = unpack("<i", bio.read(4))[0]
+        print("Mario XP: %s" % (mario_xp))
 
     #luigi xp
-    if args.list_luigi_xp or args.list_all:
+    if args.list_luigi_xp or args.list_xp or args.list_all:
         bio.seek(LUIGI_XP_LOC)
-        print("Luigi XP: %s" % (unpack("<i", bio.read(4))[0]))
+        luigi_xp = unpack("<i", bio.read(4))[0]
+        print("Luigi XP: %s" % (luigi_xp))
 
     #gold
     if args.list_gold or args.list_all:
@@ -150,21 +357,21 @@ if __name__ == "__main__":
         print("Hee Beans:     %s" % (bio.read(1)[0]))
 
     #modifications
-    #max xp
-    if args.max_xp or args.max_all:
+    #max levels
+    if args.max_levels or args.max_all:
         bio.seek(MARIO_XP_LOC)
-        bio.write(pack("<i", 9999999))
+        bio.write(pack("<i", MARIO_LEVELS[99]))
         bio.seek(LUIGI_XP_LOC)
-        bio.write(pack("<i", 9999999))
+        bio.write(pack("<i", LUIGI_LEVELS[99]))
     else:  #set xp
-        #mario xp
-        if args.mario_xp is not None and 0 <= args.mario_xp <= 9999999:
+        #mario level
+        if args.mario_level is not None and 1 <= args.mario_level <= 99:
             bio.seek(MARIO_XP_LOC)
-            bio.write(pack("<i", args.mario_xp))
-        #luigi xp
-        if args.luigi_xp is not None and 0 <= args.luigi_xp <= 9999999:
+            bio.write(pack("<i", args.mario_level))
+        #luigi level
+        if args.luigi_level is not None and 1 <= args.luigi_level <= 99:
             bio.seek(LUIGI_XP_LOC)
-            bio.write(pack("<i", args.luigi_xp))
+            bio.write(pack("<i", args.luigi_level))
 
     #max money
     if args.max_gold or args.max_all:

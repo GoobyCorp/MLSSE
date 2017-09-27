@@ -367,11 +367,11 @@ if __name__ == "__main__":
         #mario level
         if args.mario_level is not None and 1 <= args.mario_level <= 99:
             bio.seek(MARIO_XP_LOC)
-            bio.write(pack("<i", args.mario_level))
+            bio.write(pack("<i", MARIO_LEVELS[args.mario_level]))
         #luigi level
         if args.luigi_level is not None and 1 <= args.luigi_level <= 99:
             bio.seek(LUIGI_XP_LOC)
-            bio.write(pack("<i", args.luigi_level))
+            bio.write(pack("<i", LUIGI_LEVELS[args.luigi_level]))
 
     #max money
     if args.max_gold or args.max_all:

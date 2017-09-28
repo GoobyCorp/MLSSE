@@ -4,7 +4,6 @@ from io import BytesIO
 from os.path import isfile
 from struct import pack, unpack
 from argparse import ArgumentParser
-from binascii import hexlify as _hexlify
 
 MARIO_BLOB_START = 0x00
 MARIO_BLOB_LEN = 0x28
@@ -246,9 +245,6 @@ def xp_to_level(mode: int, xp: int) -> (None, int):
                 return x + 1
             elif curr_level <= xp <= next_level:  #between levels
                 return x
-
-def hexlify(b: (bytes, bytearray)) -> str:
-    return str(_hexlify(b), "utf8")
 
 if __name__ == "__main__":
     parser = ArgumentParser(description="A save editor for Mario and Luigi Superstar Saga for 3DS")

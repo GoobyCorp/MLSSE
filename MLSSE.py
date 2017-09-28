@@ -7,11 +7,15 @@ from argparse import ArgumentParser
 
 MARIO_BLOB_START = 0x00
 MARIO_BLOB_LEN = 0x28
-MARIO_XP_LOC = 0x00  #int32
+MARIO_XP_LOC = 0x1C  #int32
+MARIO_HP_LOC = 0  #int16
+MARIO_BP_LOC = 2  #int16
 
 LUIGI_BLOB_START = 0x28
 LUIGI_BLOB_LEN = 0x28
-LUIGI_XP_LOC = 0x28  #int32
+LUIGI_XP_LOC = 0x44  #int32
+LUIGI_HP_LOC = 0x28  #int16
+LUIGI_BP_LOC = 0x2A  #int16
 
 GOLD_LOC = 0x50  #int32
 

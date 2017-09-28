@@ -228,6 +228,25 @@ LUIGI_LEVELS = {
     99: 946498
 }
 
+def xp_to_level(mode: int, xp: int) -> (None, int):
+    levels = None
+    if mode == 0:
+        levels = MARIO_LEVELS
+    elif mode == 1:
+        levels = LUIGI_LEVELS
+    if xp > levels[99]:  #greater than max level
+        return 99
+    for x in range(0, len(levels)):
+        if x != 0 and x != 99:
+            curr_level = levels[x]
+            next_level = levels[x + 1]
+            if xp == curr_level:  #equal to current level
+                return x
+            elif xp == next_level:  #equal to next level
+                return x + 1
+            elif curr_level <= xp <= next_level:  #between levels
+                return x
+
 def hexlify(b: (bytes, bytearray)) -> str:
     return str(_hexlify(b), "utf8")
 
@@ -278,7 +297,7 @@ if __name__ == "__main__":
     parser.add_argument("--chuckle-beans", type=int, help="The amount of chuckle beans you want")
     parser.add_argument("--hee-beans", type=int, help="The amount of hee beans you want")
 
-    #max all
+    #maxing
     parser.add_argument("--max-gold", action="store_true", help="Set gold to 999999")
     parser.add_argument("--max-levels", action="store_true", help="Set Mario and Luigi's XP to 999999")
     parser.add_argument("--max-beans", action="store_true", help="Set all beans to 99")
@@ -308,13 +327,13 @@ if __name__ == "__main__":
     if args.list_mario_xp or args.list_xp or args.list_all:
         bio.seek(MARIO_XP_LOC)
         mario_xp = unpack("<i", bio.read(4))[0]
-        print("Mario XP: %s" % (mario_xp))
+        print("Mario XP: %s -> Level: %s" % (mario_xp, xp_to_level(0, mario_xp)))
 
     #luigi xp
     if args.list_luigi_xp or args.list_xp or args.list_all:
         bio.seek(LUIGI_XP_LOC)
         luigi_xp = unpack("<i", bio.read(4))[0]
-        print("Luigi XP: %s" % (luigi_xp))
+        print("Luigi XP: %s -> Level: %s" % (luigi_xp, xp_to_level(1, luigi_xp)))
 
     #gold
     if args.list_gold or args.list_all:
@@ -442,4 +461,4 @@ if __name__ == "__main__":
 
     out_data = bio.getvalue()
 
-    #open(args.out_file, "wb").write(out_data)
+    open(args.out_file, "wb").write(out_data)

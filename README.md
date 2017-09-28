@@ -25,8 +25,9 @@ usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--mario-level MARIO_LEVEL]
                 [--hoo-beans HOO_BEANS] [--chuckle-beans CHUCKLE_BEANS]
                 [--hee-beans HEE_BEANS] [--max-gold] [--max-levels]
                 [--max-beans] [--max-items] [--max-all] [--list-mario-xp]
-                [--list-luigi-xp] [--list-xp] [--list-gold] [--list-items]
-                [--list-beans] [--list-all]
+                [--list-luigi-xp] [--list-mario-bonuses]
+                [--list-luigi-bonuses] [--list-xp] [--list-gold]
+                [--list-items] [--list-beans] [--list-all]
 
 A save editor for Mario and Luigi Superstar Saga for 3DS
 
@@ -90,6 +91,8 @@ optional arguments:
   --max-all             Max gold, XP, beans, and items
   --list-mario-xp       List Mario's current XP
   --list-luigi-xp       List Luigi's current XP
+  --list-mario-bonuses  List Mario's bonus attributes
+  --list-luigi-bonuses  List Luigi's bonus attributes
   --list-xp             List both Mario and Luigi's XP
   --list-gold           List your current gold
   --list-items          List all items

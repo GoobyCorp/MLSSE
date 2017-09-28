@@ -7,15 +7,33 @@ from argparse import ArgumentParser
 
 MARIO_BLOB_START = 0x00
 MARIO_BLOB_LEN = 0x28
+
 MARIO_XP_LOC = 0x1C  #int32
-MARIO_HP_LOC = 0  #int16
-MARIO_BP_LOC = 2  #int16
+MARIO_HP_LOC = 0x00  #int16
+MARIO_BP_LOC = 0x02  #int16
+
+#Mario bonus HP, BP, POW, DEF, SPEED, and STACHE
+MARIO_BONUS_HP_LOC =     0x06  #int16
+MARIO_BONUS_BP_LOC =     0x0A  #int16
+MARIO_BONUS_POW_LOC =    0x0E  #int16
+MARIO_BONUS_DEF_LOC =    0x12  #int16
+MARIO_BONUS_SPEED_LOC =  0x16  #int16
+MARIO_BONUS_STACHE_LOC = 0x1A  #int16
 
 LUIGI_BLOB_START = 0x28
 LUIGI_BLOB_LEN = 0x28
+
 LUIGI_XP_LOC = 0x44  #int32
 LUIGI_HP_LOC = 0x28  #int16
 LUIGI_BP_LOC = 0x2A  #int16
+
+#Luigi bonus HP, BP, POW, DEF, SPEED, and STACHE
+LUIGI_BONUS_HP_LOC =     0x2E  #int16
+LUIGI_BONUS_BP_LOC =     0x32  #int16
+LUIGI_BONUS_POW_LOC =    0x36  #int16
+LUIGI_BONUS_DEF_LOC =    0x3A  #int16
+LUIGI_BONUS_SPEED_LOC =  0x3E  #int16
+LUIGI_BONUS_STACHE_LOC = 0x42  #int16
 
 GOLD_LOC = 0x50  #int32
 
@@ -25,7 +43,7 @@ ITEM_LEN = 0x12
 
 #int8's
 BEAN_START = 0x130
-BEAN_LEN = 4
+BEAN_LEN = 0x04
 
 MARIO_LEVELS = {
     1: 0,
@@ -126,7 +144,7 @@ MARIO_LEVELS = {
     96: 875305,
     97: 898705,
     98: 922405,
-    99: 946405
+    99: 946395  #946405
 }
 
 LUIGI_LEVELS = {
@@ -228,7 +246,7 @@ LUIGI_LEVELS = {
     96: 875398,
     97: 898798,
     98: 922498,
-    99: 946498
+    99: 946488  #946498
 }
 
 def xp_to_level(mode: int, xp: int) -> (None, int):
@@ -255,7 +273,7 @@ if __name__ == "__main__":
 
     #I/O
     parser.add_argument("-i", "--in-file", type=str, default="ML1_001.sav", help="The input save file")
-    parser.add_argument("-o", "--out-file", type=str, default="ML1_001_modded.sav", help="The output save file")
+    parser.add_argument("-o", "--out-file", type=str, help="The output save file")
 
     #modifications
     #experience and leveling
@@ -307,10 +325,13 @@ if __name__ == "__main__":
     #listing
     parser.add_argument("--list-mario-xp", action="store_true", help="List Mario's current XP")
     parser.add_argument("--list-luigi-xp", action="store_true", help="List Luigi's current XP")
+    parser.add_argument("--list-mario-bonuses", action="store_true", help="List Mario's bonus attributes")
+    parser.add_argument("--list-luigi-bonuses", action="store_true", help="List Luigi's bonus attributes")
     parser.add_argument("--list-xp", action="store_true", help="List both Mario and Luigi's XP")
     parser.add_argument("--list-gold", action="store_true", help="List your current gold")
     parser.add_argument("--list-items", action="store_true", help="List all items")
     parser.add_argument("--list-beans", action="store_true", help="List all beans")
+    #parser.
     parser.add_argument("--list-all", action="store_true", help="List everything")
 
     args = parser.parse_args()
@@ -329,11 +350,41 @@ if __name__ == "__main__":
         mario_xp = unpack("<i", bio.read(4))[0]
         print("Mario XP: %s -> Level: %s" % (mario_xp, xp_to_level(0, mario_xp)))
 
+    #mario bonuses
+    if args.list_mario_bonuses or args.list_all:
+        bio.seek(MARIO_BONUS_HP_LOC)
+        print("Mario Bonus HP:     %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Mario Bonus BP:     %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Mario Bonus POW:    %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Mario Bonus DEF:    %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Mario Bonus SPEED:  %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Mario Bonus STACHE: %s" % (unpack("<h", bio.read(2))[0]))
+
     #luigi xp
     if args.list_luigi_xp or args.list_xp or args.list_all:
         bio.seek(LUIGI_XP_LOC)
         luigi_xp = unpack("<i", bio.read(4))[0]
         print("Luigi XP: %s -> Level: %s" % (luigi_xp, xp_to_level(1, luigi_xp)))
+
+    #luigi bonuses
+    if args.list_luigi_bonuses or args.list_all:
+        bio.seek(LUIGI_BONUS_HP_LOC)
+        print("Luigi Bonus HP:     %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Luigi Bonus BP:     %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Luigi Bonus POW:    %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Luigi Bonus DEF:    %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Luigi Bonus SPEED:  %s" % (unpack("<h", bio.read(2))[0]))
+        bio.seek(bio.tell() + 2)
+        print("Luigi Bonus STACHE: %s" % (unpack("<h", bio.read(2))[0]))
 
     #gold
     if args.list_gold or args.list_all:
@@ -461,4 +512,5 @@ if __name__ == "__main__":
 
     out_data = bio.getvalue()
 
-    open(args.out_file, "wb").write(out_data)
+    if args.out_file is not None:
+        open(args.out_file, "wb").write(out_data)

@@ -278,67 +278,70 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="A save editor for Mario and Luigi Superstar Saga for 3DS")
 
     #I/O
-    parser.add_argument("-i", "--in-file", type=str, default="ML1_001.sav", help="The input save file")
+    group_required_args = parser.add_argument_group("required arguments")
+    group_required_args.add_argument("-i", "--in-file", type=str, required=True, help="The input save file")
     parser.add_argument("-o", "--out-file", type=str, help="The output save file")
 
     #modifications
     #experience and leveling
-    parser.add_argument("--level", type=int, help="The level you want Mario and Luigi to have")
-    parser.add_argument("--mario-level", type=int, help="The level you want Mario to have")
-    parser.add_argument("--luigi-level", type=int, help="The level you want Luigi to have")
+    group_modding = parser.add_argument_group("modifications")
+    group_modding.add_argument("--level", type=int, help="The level you want Mario and Luigi to have")
+    group_modding.add_argument("--mario-level", type=int, help="The level you want Mario to have")
+    group_modding.add_argument("--luigi-level", type=int, help="The level you want Luigi to have")
 
     #gold
-    parser.add_argument("--gold", type=int, help="The amount of gold you want")
+    group_modding.add_argument("--gold", type=int, help="The amount of gold you want")
 
     #items
     #mushrooms
-    parser.add_argument("--mushrooms", type=int, help="The amount of mushrooms you want")
-    parser.add_argument("--super-mushrooms", type=int, help="The amount of super mushrooms you want")
-    parser.add_argument("--ultra-mushrooms", type=int, help="The amount of ultra mushrooms you want")
-    parser.add_argument("--max-mushrooms", type=int, help="The amount of max mushrooms you want")
+    group_modding.add_argument("--mushrooms", type=int, help="The amount of mushrooms you want")
+    group_modding.add_argument("--super-mushrooms", type=int, help="The amount of super mushrooms you want")
+    group_modding.add_argument("--ultra-mushrooms", type=int, help="The amount of ultra mushrooms you want")
+    group_modding.add_argument("--max-mushrooms", type=int, help="The amount of max mushrooms you want")
     #nuts
-    parser.add_argument("--nuts", type=int, help="The amount of nuts you want")
-    parser.add_argument("--super-nuts", type=int, help="The amount of super nuts you want")
-    parser.add_argument("--ultra-nuts", type=int, help="The amount of ultra nuts you want")
-    parser.add_argument("--max-nuts", type=int, help="The amount of max nuts you want")
+    group_modding.add_argument("--nuts", type=int, help="The amount of nuts you want")
+    group_modding.add_argument("--super-nuts", type=int, help="The amount of super nuts you want")
+    group_modding.add_argument("--ultra-nuts", type=int, help="The amount of ultra nuts you want")
+    group_modding.add_argument("--max-nuts", type=int, help="The amount of max nuts you want")
     #syrups
-    parser.add_argument("--syrups", type=int, help="The amount of syrups you want")
-    parser.add_argument("--super-syrups", type=int, help="The amount of super syrups you want")
-    parser.add_argument("--ultra-syrups", type=int, help="The amount of ultra syrups you want")
-    parser.add_argument("--max-syrups", type=int, help="The amount of max syrups you want")
+    group_modding.add_argument("--syrups", type=int, help="The amount of syrups you want")
+    group_modding.add_argument("--super-syrups", type=int, help="The amount of super syrups you want")
+    group_modding.add_argument("--ultra-syrups", type=int, help="The amount of ultra syrups you want")
+    group_modding.add_argument("--max-syrups", type=int, help="The amount of max syrups you want")
     #1-ups
-    parser.add_argument("--one-ups", type=int, help="The amount of 1-ups you want")
-    parser.add_argument("--one-up-supers", type=int, help="The amount of 1-up supers you want")
+    group_modding.add_argument("--one-ups", type=int, help="The amount of 1-ups you want")
+    group_modding.add_argument("--one-up-supers", type=int, help="The amount of 1-up supers you want")
     #misc
-    parser.add_argument("--golden-mushrooms", type=int, help="The amount of golden mushrooms you want")
-    parser.add_argument("--refreshing-herbs", type=int, help="The amount of refreshing herbs you want")
-    parser.add_argument("--boo-biscuits", type=int, help="The amount of boo biscuits you want")
-    parser.add_argument("--red-peppers", type=int, help="The amount of red peppers you want")
-    parser.add_argument("--green-peppers", type=int, help="The amount of green peppers you want")
+    group_modding.add_argument("--golden-mushrooms", type=int, help="The amount of golden mushrooms you want")
+    group_modding.add_argument("--refreshing-herbs", type=int, help="The amount of refreshing herbs you want")
+    group_modding.add_argument("--boo-biscuits", type=int, help="The amount of boo biscuits you want")
+    group_modding.add_argument("--red-peppers", type=int, help="The amount of red peppers you want")
+    group_modding.add_argument("--green-peppers", type=int, help="The amount of green peppers you want")
 
     #beans
-    parser.add_argument("--woo-beans", type=int, help="The amount of woo beans you want")
-    parser.add_argument("--hoo-beans", type=int, help="The amount of hoo beans you want")
-    parser.add_argument("--chuckle-beans", type=int, help="The amount of chuckle beans you want")
-    parser.add_argument("--hee-beans", type=int, help="The amount of hee beans you want")
+    group_modding.add_argument("--woo-beans", type=int, help="The amount of woo beans you want")
+    group_modding.add_argument("--hoo-beans", type=int, help="The amount of hoo beans you want")
+    group_modding.add_argument("--chuckle-beans", type=int, help="The amount of chuckle beans you want")
+    group_modding.add_argument("--hee-beans", type=int, help="The amount of hee beans you want")
 
     #maxing
-    parser.add_argument("--max-gold", action="store_true", help="Set gold to 999999")
-    parser.add_argument("--max-levels", action="store_true", help="Set Mario and Luigi's XP to 999999")
-    parser.add_argument("--max-beans", action="store_true", help="Set all beans to 99")
-    parser.add_argument("--max-items", action="store_true", help="Set all items to 99")
-    parser.add_argument("--max-all", action="store_true", help="Max gold, XP, beans, and items")
+    group_modding.add_argument("--max-gold", action="store_true", help="Set gold to 999999")
+    group_modding.add_argument("--max-levels", action="store_true", help="Set Mario and Luigi's XP to 999999")
+    group_modding.add_argument("--max-beans", action="store_true", help="Set all beans to 99")
+    group_modding.add_argument("--max-items", action="store_true", help="Set all items to 99")
+    group_modding.add_argument("--max-all", action="store_true", help="Max gold, XP, beans, and items")
 
     #listing
-    parser.add_argument("--list-mario-xp", action="store_true", help="List Mario's current XP")
-    parser.add_argument("--list-luigi-xp", action="store_true", help="List Luigi's current XP")
-    parser.add_argument("--list-mario-bonuses", action="store_true", help="List Mario's bonus attributes")
-    parser.add_argument("--list-luigi-bonuses", action="store_true", help="List Luigi's bonus attributes")
-    parser.add_argument("--list-xp", action="store_true", help="List both Mario and Luigi's XP")
-    parser.add_argument("--list-gold", action="store_true", help="List your current gold")
-    parser.add_argument("--list-items", action="store_true", help="List all items")
-    parser.add_argument("--list-beans", action="store_true", help="List all beans")
-    parser.add_argument("--list-all", action="store_true", help="List everything")
+    group_listing = parser.add_argument_group("information")
+    group_listing.add_argument("--list-mario-xp", action="store_true", help="List Mario's current XP")
+    group_listing.add_argument("--list-luigi-xp", action="store_true", help="List Luigi's current XP")
+    group_listing.add_argument("--list-mario-bonuses", action="store_true", help="List Mario's bonus attributes")
+    group_listing.add_argument("--list-luigi-bonuses", action="store_true", help="List Luigi's bonus attributes")
+    group_listing.add_argument("--list-xp", action="store_true", help="List both Mario and Luigi's XP")
+    group_listing.add_argument("--list-gold", action="store_true", help="List your current gold")
+    group_listing.add_argument("--list-items", action="store_true", help="List all items")
+    group_listing.add_argument("--list-beans", action="store_true", help="List all beans")
+    group_listing.add_argument("--list-all", action="store_true", help="List everything")
 
     #settings
     parser.add_argument("--no-backup", action="store_true", help="Disable making a backup of your save")

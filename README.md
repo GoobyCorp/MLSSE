@@ -8,7 +8,7 @@ You can grab your save using [JKSM](https://gbatemp.net/threads/release-jks-save
 
 Usage is as follows:
 ```
-usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--level LEVEL]
+usage: MLSSE.py [-h] -i IN_FILE [-o OUT_FILE] [--level LEVEL]
                 [--mario-level MARIO_LEVEL] [--luigi-level LUIGI_LEVEL]
                 [--gold GOLD] [--mushrooms MUSHROOMS]
                 [--super-mushrooms SUPER_MUSHROOMS]
@@ -28,16 +28,21 @@ usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--level LEVEL]
                 [--max-beans] [--max-items] [--max-all] [--list-mario-xp]
                 [--list-luigi-xp] [--list-mario-bonuses]
                 [--list-luigi-bonuses] [--list-xp] [--list-gold]
-                [--list-items] [--list-beans] [--list-all]
+                [--list-items] [--list-beans] [--list-all] [--no-backup]
 
 A save editor for Mario and Luigi Superstar Saga for 3DS
 
 optional arguments:
   -h, --help            show this help message and exit
-  -i IN_FILE, --in-file IN_FILE
-                        The input save file
   -o OUT_FILE, --out-file OUT_FILE
                         The output save file
+  --no-backup           Disable making a backup of your save
+
+required arguments:
+  -i IN_FILE, --in-file IN_FILE
+                        The input save file
+
+modifications:
   --level LEVEL         The level you want Mario and Luigi to have
   --mario-level MARIO_LEVEL
                         The level you want Mario to have
@@ -91,6 +96,8 @@ optional arguments:
   --max-beans           Set all beans to 99
   --max-items           Set all items to 99
   --max-all             Max gold, XP, beans, and items
+
+information:
   --list-mario-xp       List Mario's current XP
   --list-luigi-xp       List Luigi's current XP
   --list-mario-bonuses  List Mario's bonus attributes

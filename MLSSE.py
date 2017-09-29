@@ -5,12 +5,13 @@ from os.path import isfile
 from struct import pack, unpack
 from argparse import ArgumentParser
 
+#Mario's
 MARIO_BLOB_START = 0x00
 MARIO_BLOB_LEN = 0x28
 
-MARIO_XP_LOC = 0x1C  #int32
 MARIO_HP_LOC = 0x00  #int16
 MARIO_BP_LOC = 0x02  #int16
+MARIO_XP_LOC = 0x1C  #int32
 
 #Mario bonus HP, BP, POW, DEF, SPEED, and STACHE
 MARIO_BONUS_HP_LOC =     0x06  #int16
@@ -20,12 +21,13 @@ MARIO_BONUS_DEF_LOC =    0x12  #int16
 MARIO_BONUS_SPEED_LOC =  0x16  #int16
 MARIO_BONUS_STACHE_LOC = 0x1A  #int16
 
+#Luigi's
 LUIGI_BLOB_START = 0x28
 LUIGI_BLOB_LEN = 0x28
 
-LUIGI_XP_LOC = 0x44  #int32
 LUIGI_HP_LOC = 0x28  #int16
 LUIGI_BP_LOC = 0x2A  #int16
+LUIGI_XP_LOC = 0x44  #int32
 
 #Luigi bonus HP, BP, POW, DEF, SPEED, and STACHE
 LUIGI_BONUS_HP_LOC =     0x2E  #int16
@@ -35,11 +37,12 @@ LUIGI_BONUS_DEF_LOC =    0x3A  #int16
 LUIGI_BONUS_SPEED_LOC =  0x3E  #int16
 LUIGI_BONUS_STACHE_LOC = 0x42  #int16
 
+#misc.
 GOLD_LOC = 0x50  #int32
 
 #int8's
 ITEM_START = 0x54
-ITEM_LEN = 0x12
+ITEM_LEN = 0x13
 
 #int8's
 BEAN_START = 0x130
@@ -277,6 +280,7 @@ if __name__ == "__main__":
 
     #modifications
     #experience and leveling
+    parser.add_argument("--level", type=int, help="The level you want Mario and Luigi to have")
     parser.add_argument("--mario-level", type=int, help="The level you want Mario to have")
     parser.add_argument("--luigi-level", type=int, help="The level you want Luigi to have")
 
@@ -433,7 +437,12 @@ if __name__ == "__main__":
         bio.write(pack("<i", MARIO_LEVELS[99]))
         bio.seek(LUIGI_XP_LOC)
         bio.write(pack("<i", LUIGI_LEVELS[99]))
-    else:  #set xp
+    elif args.level is not None and 1 <= args.level <= 99:  #set both levels
+        bio.seek(MARIO_XP_LOC)
+        bio.write(pack("<i", MARIO_LEVELS[args.level]))
+        bio.seek(LUIGI_XP_LOC)
+        bio.write(pack("<i", LUIGI_LEVELS[args.level]))
+    else: #set xp
         #mario level
         if args.mario_level is not None and 1 <= args.mario_level <= 99:
             bio.seek(MARIO_XP_LOC)

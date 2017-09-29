@@ -4,7 +4,7 @@ This is an editor for the new 3DS release of Mario and Luigi Superstar Saga.
 
 **BACK UP YOUR SAVES**
 
-You can grab your save using [JKSM](https://gbatemp.net/threads/release-jks-savemanager-homebrew-cia-save-manager.413143/) you want the `ML1_001.sav` file for slot one and `ML1_002.sav` for slot two.
+You can grab your save using [JKSM](https://gbatemp.net/threads/release-jks-savemanager-homebrew-cia-save-manager.413143/), you want the `ML1_001.sav` file for slot one and `ML1_002.sav` for slot two.
 
 Usage is as follows:
 ```

@@ -5,6 +5,9 @@ from os.path import isfile
 from struct import pack, unpack
 from argparse import ArgumentParser
 
+#save file info
+SAVE_FILE_SIZE = 0x12510
+
 #Mario's
 MARIO_BLOB_START = 0x00
 MARIO_BLOB_LEN = 0x28
@@ -335,8 +338,10 @@ if __name__ == "__main__":
     parser.add_argument("--list-gold", action="store_true", help="List your current gold")
     parser.add_argument("--list-items", action="store_true", help="List all items")
     parser.add_argument("--list-beans", action="store_true", help="List all beans")
-    #parser.
     parser.add_argument("--list-all", action="store_true", help="List everything")
+
+    #settings
+    parser.add_argument("--no-backup", action="store_true", help="Disable making a backup of your save")
 
     args = parser.parse_args()
 
@@ -345,7 +350,11 @@ if __name__ == "__main__":
     save_data = open(args.in_file, "rb").read()
     bio = BytesIO(save_data)
 
-    assert len(save_data) == 0x12510, "Invalid save file size!"
+    assert len(save_data) == SAVE_FILE_SIZE, "Invalid save file size!"
+
+    #backups
+    if not args.no_backup:
+        open("backup.sav", "wb").write(save_data)
 
     #listing
     #mario xp
@@ -463,8 +472,7 @@ if __name__ == "__main__":
     #max items
     if args.max_items or args.max_all:
         bio.seek(ITEM_START)
-        for x in range(ITEM_LEN):
-            bio.write(bytes([99]))
+        bio.write(bytes([99 for x in range(ITEM_LEN)]))
     else:  #set items
         bio.seek(ITEM_START)
         curr_vals = bytearray(bio.read(ITEM_LEN))
@@ -503,8 +511,7 @@ if __name__ == "__main__":
     #max beans
     if args.max_beans or args.max_all:
         bio.seek(BEAN_START)
-        for x in range(BEAN_LEN):
-            bio.write(bytes([99]))
+        bio.write(bytes([99 for x in range(BEAN_LEN)]))
     else:  #set beans
         bio.seek(BEAN_START)
         curr_vals = bytearray(bio.read(4))

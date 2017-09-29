@@ -8,9 +8,10 @@ You can grab your save using [JKSM](https://gbatemp.net/threads/release-jks-save
 
 Usage is as follows:
 ```
-usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--mario-level MARIO_LEVEL]
-                [--luigi-level LUIGI_LEVEL] [--gold GOLD]
-                [--mushrooms MUSHROOMS] [--super-mushrooms SUPER_MUSHROOMS]
+usage: MLSSE.py [-h] [-i IN_FILE] [-o OUT_FILE] [--level LEVEL]
+                [--mario-level MARIO_LEVEL] [--luigi-level LUIGI_LEVEL]
+                [--gold GOLD] [--mushrooms MUSHROOMS]
+                [--super-mushrooms SUPER_MUSHROOMS]
                 [--ultra-mushrooms ULTRA_MUSHROOMS]
                 [--max-mushrooms MAX_MUSHROOMS] [--nuts NUTS]
                 [--super-nuts SUPER_NUTS] [--ultra-nuts ULTRA_NUTS]
@@ -37,6 +38,7 @@ optional arguments:
                         The input save file
   -o OUT_FILE, --out-file OUT_FILE
                         The output save file
+  --level LEVEL         The level you want Mario and Luigi to have
   --mario-level MARIO_LEVEL
                         The level you want Mario to have
   --luigi-level LUIGI_LEVEL

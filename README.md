@@ -10,7 +10,7 @@ Usage is as follows:
 ```
 usage: MLSSE.py [-h] -i IN_FILE [-o OUT_FILE] [--level LEVEL]
                 [--mario-level MARIO_LEVEL] [--luigi-level LUIGI_LEVEL]
-                [--gold GOLD] [--mushrooms MUSHROOMS]
+                [--coins COINS] [--mushrooms MUSHROOMS]
                 [--super-mushrooms SUPER_MUSHROOMS]
                 [--ultra-mushrooms ULTRA_MUSHROOMS]
                 [--max-mushrooms MAX_MUSHROOMS] [--nuts NUTS]
@@ -24,10 +24,10 @@ usage: MLSSE.py [-h] -i IN_FILE [-o OUT_FILE] [--level LEVEL]
                 [--boo-biscuits BOO_BISCUITS] [--red-peppers RED_PEPPERS]
                 [--green-peppers GREEN_PEPPERS] [--woo-beans WOO_BEANS]
                 [--hoo-beans HOO_BEANS] [--chuckle-beans CHUCKLE_BEANS]
-                [--hee-beans HEE_BEANS] [--max-gold] [--max-levels]
+                [--hee-beans HEE_BEANS] [--max-coins] [--max-levels]
                 [--max-beans] [--max-items] [--max-all] [--list-mario-xp]
                 [--list-luigi-xp] [--list-mario-bonuses]
-                [--list-luigi-bonuses] [--list-xp] [--list-gold]
+                [--list-luigi-bonuses] [--list-xp] [--list-coins]
                 [--list-items] [--list-beans] [--list-all] [--no-backup]
 
 A save editor for Mario and Luigi Superstar Saga for 3DS
@@ -48,7 +48,7 @@ modifications:
                         The level you want Mario to have
   --luigi-level LUIGI_LEVEL
                         The level you want Luigi to have
-  --gold GOLD           The amount of gold you want
+  --coins COINS         The amount of coins you want
   --mushrooms MUSHROOMS
                         The amount of mushrooms you want
   --super-mushrooms SUPER_MUSHROOMS
@@ -91,11 +91,11 @@ modifications:
                         The amount of chuckle beans you want
   --hee-beans HEE_BEANS
                         The amount of hee beans you want
-  --max-gold            Set gold to 999999
+  --max-coins           Set coins to 999999
   --max-levels          Set Mario and Luigi's XP to 999999
   --max-beans           Set all beans to 99
   --max-items           Set all items to 99
-  --max-all             Max gold, XP, beans, and items
+  --max-all             Max coins, levels, beans, and items
 
 information:
   --list-mario-xp       List Mario's current XP
@@ -103,7 +103,7 @@ information:
   --list-mario-bonuses  List Mario's bonus attributes
   --list-luigi-bonuses  List Luigi's bonus attributes
   --list-xp             List both Mario and Luigi's XP
-  --list-gold           List your current gold
+  --list-coins          List your current coins
   --list-items          List all items
   --list-beans          List all beans
   --list-all            List everything

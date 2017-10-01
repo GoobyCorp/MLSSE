@@ -41,7 +41,7 @@ LUIGI_BONUS_SPEED_LOC =  0x3E  #int16
 LUIGI_BONUS_STACHE_LOC = 0x42  #int16
 
 #misc.
-GOLD_LOC = 0x50  #int32
+COINS_LOC = 0x50  #int32
 
 #int8's
 ITEM_START = 0x54
@@ -278,8 +278,8 @@ if __name__ == "__main__":
     parser = ArgumentParser(description="A save editor for Mario and Luigi Superstar Saga for 3DS")
 
     #I/O
-    group_required_args = parser.add_argument_group("required arguments")
-    group_required_args.add_argument("-i", "--in-file", type=str, required=True, help="The input save file")
+    group_required = parser.add_argument_group("required arguments")
+    group_required.add_argument("-i", "--in-file", type=str, required=True, help="The input save file")
     parser.add_argument("-o", "--out-file", type=str, help="The output save file")
 
     #modifications
@@ -289,8 +289,8 @@ if __name__ == "__main__":
     group_modding.add_argument("--mario-level", type=int, help="The level you want Mario to have")
     group_modding.add_argument("--luigi-level", type=int, help="The level you want Luigi to have")
 
-    #gold
-    group_modding.add_argument("--gold", type=int, help="The amount of gold you want")
+    #coins
+    group_modding.add_argument("--coins", type=int, help="The amount of coins you want")
 
     #items
     #mushrooms
@@ -325,11 +325,11 @@ if __name__ == "__main__":
     group_modding.add_argument("--hee-beans", type=int, help="The amount of hee beans you want")
 
     #maxing
-    group_modding.add_argument("--max-gold", action="store_true", help="Set gold to 999999")
+    group_modding.add_argument("--max-coins", action="store_true", help="Set coins to 999999")
     group_modding.add_argument("--max-levels", action="store_true", help="Set Mario and Luigi's XP to 999999")
     group_modding.add_argument("--max-beans", action="store_true", help="Set all beans to 99")
     group_modding.add_argument("--max-items", action="store_true", help="Set all items to 99")
-    group_modding.add_argument("--max-all", action="store_true", help="Max gold, XP, beans, and items")
+    group_modding.add_argument("--max-all", action="store_true", help="Max coins, levels, beans, and items")
 
     #listing
     group_listing = parser.add_argument_group("information")
@@ -338,7 +338,7 @@ if __name__ == "__main__":
     group_listing.add_argument("--list-mario-bonuses", action="store_true", help="List Mario's bonus attributes")
     group_listing.add_argument("--list-luigi-bonuses", action="store_true", help="List Luigi's bonus attributes")
     group_listing.add_argument("--list-xp", action="store_true", help="List both Mario and Luigi's XP")
-    group_listing.add_argument("--list-gold", action="store_true", help="List your current gold")
+    group_listing.add_argument("--list-coins", action="store_true", help="List your current coins")
     group_listing.add_argument("--list-items", action="store_true", help="List all items")
     group_listing.add_argument("--list-beans", action="store_true", help="List all beans")
     group_listing.add_argument("--list-all", action="store_true", help="List everything")
@@ -402,10 +402,10 @@ if __name__ == "__main__":
         bio.seek(bio.tell() + 2)
         print("Luigi Bonus STACHE: %s" % (unpack("<h", bio.read(2))[0]))
 
-    #gold
-    if args.list_gold or args.list_all:
-        bio.seek(GOLD_LOC)
-        print("Gold: %s" % (unpack("<i", bio.read(4))[0]))
+    #coins
+    if args.list_coins or args.list_all:
+        bio.seek(COINS_LOC)
+        print("Coins: %s" % (unpack("<i", bio.read(4))[0]))
 
     #items
     if args.list_items or args.list_all:
@@ -465,12 +465,12 @@ if __name__ == "__main__":
             bio.write(pack("<i", LUIGI_LEVELS[args.luigi_level]))
 
     #max money
-    if args.max_gold or args.max_all:
-        bio.seek(GOLD_LOC)
+    if args.max_coins or args.max_all:
+        bio.seek(COINS_LOC)
         bio.write(pack("<i", 999999))
-    elif args.gold is not None and 0 <= args.gold <= 999999:  #set gold
-        bio.seek(GOLD_LOC)
-        bio.write(pack("<i", args.gold))
+    elif args.coins is not None and 0 <= args.coins <= 999999:  #set coins
+        bio.seek(COINS_LOC)
+        bio.write(pack("<i", args.coins))
 
     #max items
     if args.max_items or args.max_all:

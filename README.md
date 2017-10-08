@@ -10,8 +10,9 @@ Usage is as follows:
 ```
 usage: MLSSE.py [-h] -i IN_FILE [-o OUT_FILE] [--level LEVEL]
                 [--mario-level MARIO_LEVEL] [--luigi-level LUIGI_LEVEL]
-                [--coins COINS] [--mushrooms MUSHROOMS]
-                [--super-mushrooms SUPER_MUSHROOMS]
+                [--mario-bonuses MARIO_BONUSES]
+                [--luigi-bonuses LUIGI_BONUSES] [--coins COINS]
+                [--mushrooms MUSHROOMS] [--super-mushrooms SUPER_MUSHROOMS]
                 [--ultra-mushrooms ULTRA_MUSHROOMS]
                 [--max-mushrooms MAX_MUSHROOMS] [--nuts NUTS]
                 [--super-nuts SUPER_NUTS] [--ultra-nuts ULTRA_NUTS]
@@ -48,6 +49,10 @@ modifications:
                         The level you want Mario to have
   --luigi-level LUIGI_LEVEL
                         The level you want Luigi to have
+  --mario-bonuses MARIO_BONUSES
+                        The value you want to set Mario's bonus stats to
+  --luigi-bonuses LUIGI_BONUSES
+                        The value you want to set Luigi's bonus stats to
   --coins COINS         The amount of coins you want
   --mushrooms MUSHROOMS
                         The amount of mushrooms you want

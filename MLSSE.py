@@ -8,6 +8,10 @@ from argparse import ArgumentParser
 #save file info
 SAVE_FILE_SIZE = 0x12510
 
+#max values
+SHORT_MAX = 32767
+INT_MAX = 2147483647
+
 #Mario's
 MARIO_BLOB_START = 0x00
 MARIO_BLOB_LEN = 0x28
@@ -50,6 +54,13 @@ ITEM_LEN = 0x13
 #int8's
 BEAN_START = 0x130
 BEAN_LEN = 0x04
+
+#amiibo's
+#seems to start on the 0xEC0 row
+#@todo need to find where the stampbooks are located
+AMIIBO_MARIO = 0xEC9  #FF1F seems to make them all appear
+AMIIBO_MINIONS_ONE = None
+AMIIBO_MINIONS_TWO = None
 
 MARIO_LEVELS = {
     1: 0,
@@ -288,6 +299,8 @@ if __name__ == "__main__":
     group_modding.add_argument("--level", type=int, help="The level you want Mario and Luigi to have")
     group_modding.add_argument("--mario-level", type=int, help="The level you want Mario to have")
     group_modding.add_argument("--luigi-level", type=int, help="The level you want Luigi to have")
+    group_modding.add_argument("--mario-bonuses", type=int, help="The value you want to set Mario's bonus stats to")
+    group_modding.add_argument("--luigi-bonuses", type=int, help="The value you want to set Luigi's bonus stats to")
 
     #coins
     group_modding.add_argument("--coins", type=int, help="The amount of coins you want")
@@ -463,6 +476,36 @@ if __name__ == "__main__":
         if args.luigi_level is not None and 1 <= args.luigi_level <= 99:
             bio.seek(LUIGI_XP_LOC)
             bio.write(pack("<i", LUIGI_LEVELS[args.luigi_level]))
+
+    #mario bonus stats
+    if args.mario_bonuses is not None and 1 <= args.mario_bonuses <= SHORT_MAX:
+        bio.seek(MARIO_BONUS_HP_LOC)
+        bio.write(pack("<h", args.mario_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.mario_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.mario_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.mario_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.mario_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.mario_bonuses))
+
+    #luigis bonus stats
+    if args.luigi_bonuses is not None and 1 <= args.luigi_bonuses <= SHORT_MAX:
+        bio.seek(LUIGI_BONUS_HP_LOC)
+        bio.write(pack("<h", args.luigi_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.luigi_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.luigi_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.luigi_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.luigi_bonuses))
+        bio.seek(bio.tell() + 2)
+        bio.write(pack("<h", args.luigi_bonuses))
 
     #max money
     if args.max_coins or args.max_all:

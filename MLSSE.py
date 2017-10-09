@@ -478,34 +478,16 @@ if __name__ == "__main__":
             bio.write(pack("<i", LUIGI_LEVELS[args.luigi_level]))
 
     #mario bonus stats
-    if args.mario_bonuses is not None and 1 <= args.mario_bonuses <= SHORT_MAX:
+    if args.mario_bonuses is not None and 1 <= args.mario_bonuses <= SHORT_MAX or args.max_all:
         bio.seek(MARIO_BONUS_HP_LOC)
-        bio.write(pack("<h", args.mario_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.mario_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.mario_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.mario_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.mario_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.mario_bonuses))
+        b = b"\x00\x00".join([pack("<h", args.mario_bonuses if args.mario_bonuses is not None else SHORT_MAX) for x in range(6)])
+        bio.write(b)
 
     #luigis bonus stats
-    if args.luigi_bonuses is not None and 1 <= args.luigi_bonuses <= SHORT_MAX:
+    if args.luigi_bonuses is not None and 1 <= args.luigi_bonuses <= SHORT_MAX or args.max_all:
         bio.seek(LUIGI_BONUS_HP_LOC)
-        bio.write(pack("<h", args.luigi_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.luigi_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.luigi_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.luigi_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.luigi_bonuses))
-        bio.seek(bio.tell() + 2)
-        bio.write(pack("<h", args.luigi_bonuses))
+        b = b"\x00\x00".join([pack("<h", args.luigi_bonuses if args.luigi_bonuses is not None else SHORT_MAX) for x in range(6)])
+        bio.write(b)
 
     #max money
     if args.max_coins or args.max_all:

@@ -49,7 +49,7 @@ COINS_LOC = 0x50  #int32
 
 #int8's
 ITEM_START = 0x54
-ITEM_LEN = 0x13
+ITEM_LEN = 0x1A
 
 #int8's
 BEAN_START = 0x130
@@ -330,6 +330,14 @@ if __name__ == "__main__":
     group_modding.add_argument("--boo-biscuits", type=int, help="The amount of boo biscuits you want")
     group_modding.add_argument("--red-peppers", type=int, help="The amount of red peppers you want")
     group_modding.add_argument("--green-peppers", type=int, help="The amount of green peppers you want")
+    #blends
+    group_modding.add_argument("--woohoo-blends", type=int, help="The amount of Woohoo Blends you want")
+    group_modding.add_argument("--hoohoo-blends", type=int, help="The amount of Hoohoo Blends you want")
+    group_modding.add_argument("--chuckle-blends", type=int, help="The amount of Chuckle Blends you want")
+    group_modding.add_argument("--teehee-blends", type=int, help="The amount of Teehee Blends you want")
+    group_modding.add_argument("--hoolumbians", type=int, help="The amount of Hoolumbians you want")
+    group_modding.add_argument("--chuckoccinos", type=int, help="The amount of Chuckoccinos you want")
+    group_modding.add_argument("--teeheespressos", type=int, help="The amount of Teeheespressos you want")
 
     #beans
     group_modding.add_argument("--woo-beans", type=int, help="The amount of woo beans you want")
@@ -446,6 +454,14 @@ if __name__ == "__main__":
         print("Boo Biscuits:     %s" % (bio.read(1)[0]))
         print("Red Peppers:      %s" % (bio.read(1)[0]))
         print("Green Peppers:    %s" % (bio.read(1)[0]))
+        
+        print("Woohoo Blends:    %s" % (bio.read(1)[0]))
+        print("Hoohoo Blends:    %s" % (bio.read(1)[0]))
+        print("Chuckle Blends:   %s" % (bio.read(1)[0]))
+        print("Teehee Blends:    %s" % (bio.read(1)[0]))
+        print("Hoolumbians:      %s" % (bio.read(1)[0]))
+        print("Chuckoccinos:     %s" % (bio.read(1)[0]))
+        print("Teeheespressos:   %s" % (bio.read(1)[0]))
 
     #beans
     if args.list_beans or args.list_all:
@@ -528,7 +544,15 @@ if __name__ == "__main__":
             args.refreshing_herbs,
             args.boo_biscuits,
             args.red_peppers,
-            args.green_peppers
+            args.green_peppers,
+            #blends
+            args.woohoo_blends,
+            args.hoohoo_blends,
+            args.chuckle_blends,
+            args.teehee_blends,
+            args.hoolumbians,
+            args.chuckoccinos,
+            args.teeheespressos
         ]
         for x in range(len(items)):
             if items[x] is not None and 0 <= items[x] <= 99:

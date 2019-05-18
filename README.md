@@ -25,7 +25,13 @@ usage: MLSSE.py [-h] -i IN_FILE [-o OUT_FILE] [--level LEVEL]
                 [--golden-mushrooms GOLDEN_MUSHROOMS]
                 [--refreshing-herbs REFRESHING_HERBS]
                 [--boo-biscuits BOO_BISCUITS] [--red-peppers RED_PEPPERS]
-                [--green-peppers GREEN_PEPPERS] [--woo-beans WOO_BEANS]
+                [--green-peppers GREEN_PEPPERS] 
+                [--woohoo-blends WOOHOO_BLENDS]
+                [--hoohoo-blends HOOHOO_BLENDS]
+                [--chuckle-blends CHUCKLE_BLENDS]
+                [--teehee-blends TEEHEE_BLENDS]
+                [--hoolumbians HOOLUMBIANS] [--chuckoccinos CHUCKOCCINOS]
+                [--teeheespressos TEEHEESPRESSOS] [--woo-beans WOO_BEANS]
                 [--hoo-beans HOO_BEANS] [--chuckle-beans CHUCKLE_BEANS]
                 [--hee-beans HEE_BEANS] [--max-coins] [--max-levels]
                 [--max-beans] [--max-items] [--max-all] [--list-mario-xp]
@@ -90,6 +96,20 @@ modifications:
                         The amount of red peppers you want
   --green-peppers GREEN_PEPPERS
                         The amount of green peppers you want
+  --woohoo-blends WOOHOO_BLENDS
+                        The amount of Woohoo Blends you want
+  --hoohoo-blends HOOHOO_BLENDS
+                        The amount of Hoohoo Blends you want
+  --chuckle-blends CHUCKLE_BLENDS
+                        The amount of Chuckle Blends you want
+  --teehee-blends TEEHEE_BLENDS
+                        The amount of Teehee Blends you want
+  --hoolumbians HOOLUMBIANS
+                        The amount of Hoolumbians you want
+  --chuckoccinos CHUCKOCCINOS
+                        The amount of Chuckoccinos you want
+  --teeheespressos TEEHEESPRESSOS
+                        The amount of Teeheespressos you want
   --woo-beans WOO_BEANS
                         The amount of woo beans you want
   --hoo-beans HOO_BEANS
